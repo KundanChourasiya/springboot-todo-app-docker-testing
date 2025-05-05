@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+
+  todo-app:
+    container_name: todo-app_v1
+    build:
+      context: .
+    environment:
+      - SPRING_DATASOURCE_USERNAME: root
+      - SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/sbms?allowPublicKeyRetrieval=true&useSSL=false"
+      - SPRING_DATASOURCE_PASSWORD: test
+    ports:
+      - "8080:8080"
+    networks:
+      - todo-network
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=sbms
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./todo-mysql:/var/lib/mysql
+    networks:
+      - todo-network
+    healthcheck:
+      test: [ "CMD","mysqladmin","ping","-h","localhost","-uroot","-ptest" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: always
+
+volumes:
+  todo-mysql:
+
+networks:
+  todo-network:
