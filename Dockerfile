@@ -8,13 +8,13 @@ WORKDIR /app
 # Copy source code from local to container
 COPY . /app
 
-# Build application and skip test cases and create Jar file
+# Build application and skip test cases and create Jar/war file
 #EXPOSE 8080
 RUN mvn clean install -DskipTests=true
 
-# ENTRYPOINT ["java", "-jar", "/todo-app.jar"]
+# ENTRYPOINT ["java", "-jar", "/todo-app.war"]
 
-# Stage 2 - Rexecute Jar file from the above stage
+# Stage 2 - Re-execute Jar file from the above stage
 # Import small size java image
 FROM openjdk:17-alpine
 
@@ -22,10 +22,10 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Copy build from stage 1 (builder)
-COPY --from=builder /app/target/*.jar /app/target/todo-app.jar
+COPY --from=builder /app/target/*.war /app/target/todo-app.war
 
 # Expose application port
 EXPOSE 8080
 
 # Start the application
-ENTRYPOINT ["java", "-jar", "/app/target/todo-app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/target/todo-app.war"]
