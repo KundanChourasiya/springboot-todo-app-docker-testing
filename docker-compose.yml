@@ -6,8 +6,8 @@ services:
     build:
       context: .
     environment:
-      SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_URL: "jdbc:mysql://mysql:3306/sbms?allowPublicKeyRetrieval=true&useSSL=false"
+      SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: test
     ports:
       - "8080:8080"
