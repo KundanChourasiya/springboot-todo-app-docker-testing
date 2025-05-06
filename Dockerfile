@@ -12,7 +12,7 @@ COPY . /app
 #EXPOSE 8080
 RUN mvn clean install -DskipTests=true
 
-ENTRYPOINT ["java", "-jar", "/todo-app.war"]
+# ENTRYPOINT ["java", "-jar", "/todo-app.war"]
 
 # Stage 2 - app build
 # Import small size java image
