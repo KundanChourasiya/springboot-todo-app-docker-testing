@@ -25,7 +25,7 @@ WORKDIR /app
 COPY --from=builder /app/target/*.war /app/target/todo-app.war
 
 # Expose application port
-EXPOSE 8080
+#EXPOSE 8080
 
 # Start the application
 ENTRYPOINT ["java", "-jar", "/app/target/todo-app.war"]
