@@ -1,6 +1,6 @@
 # Stage1 - Build the Jar (Java Application Runtime) Using maven
 # Maven image
-FROM maven:3.9.9-openjdk-17 AS builder
+FROM maven:3.8.3-openjdk-17 AS builder 
 
 # Set working directory
 WORKDIR /app
@@ -25,7 +25,7 @@ WORKDIR /app
 COPY --from=builder /app/target/*.war /app/target/todo-app.war
 
 # Expose application port
-EXPOSE 8080
+#EXPOSE 8080
 
 # Start the application
 ENTRYPOINT ["java", "-jar", "/app/target/todo-app.war"]
