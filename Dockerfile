@@ -28,4 +28,4 @@ COPY --from=builder /app/target/*.war /app/target/todo-app.war
 EXPOSE 8080
 
 # Start the application
-# ENTRYPOINT ["java", "-jar", "/app/target/todo-app.war"]
+ENTRYPOINT ["java", "-jar", "/app/target/todo-app.war"]
