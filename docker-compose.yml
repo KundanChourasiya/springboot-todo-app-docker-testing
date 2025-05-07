@@ -27,8 +27,8 @@ services:
     container_name: "mysql"
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=test
-      - MYSQL_DATABASE=sbms
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sbms
     ports:
       - "3306:3306"
     volumes:
